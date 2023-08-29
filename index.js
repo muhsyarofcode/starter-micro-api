@@ -99,8 +99,9 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
   failureRedirect:'/'
 }));
 router.get('/setcookie', function(req,res){
-  res.set('content-type', 'text/plain');
-  res.send(JSON.stringify(req.session));
+  const cookie = req.session
+  res.cookie('cookie',cookie)
+  res.json(req.session)
 });
 router.get('/token', refreshToken);
 router.delete('/out', Logout);
