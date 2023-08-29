@@ -30,10 +30,10 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false,
-  cookie:{
+  cookie:('refreshToken', (req.user),{
     secure:false,
     maxAge: 24 * 60 * 60 * 1000
-  }
+  })
 }));
 
 app.use(passport.authenticate('session'));
@@ -99,8 +99,6 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
   failureRedirect:'/'
 }));
 router.get('/setcookie', function(req,res){
-  const cookie = req.session
-  console.log(cookie)
   res.json(req.session)
 });
 router.get('/token', refreshToken);
