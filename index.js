@@ -29,7 +29,12 @@ app.use(passport.initialize())
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie:{
+    secure: true,
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000
+  }
 }));
 
 app.use(passport.authenticate('session'));
