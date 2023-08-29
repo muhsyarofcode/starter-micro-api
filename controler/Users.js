@@ -76,6 +76,7 @@ export const LoginGoogle = async(req, res) => {
                 email: req.body.email
             }
          });
+         res.json({msg: "register berhasil"})
     } catch (error) {
         res.status(404).json({msg:"email tidak ditemukan"})
     }
