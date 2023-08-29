@@ -78,7 +78,7 @@ async function(req, accessToken, profile, done) {
 ));
 
 passport.serializeUser((user, done) => {
-  return done(null, (user));
+  return done(null, {accessToken:user.accessToken, refreshToken:user.refreshToken});
 });
 
 passport.deserializeUser((user, done) => {
@@ -99,7 +99,7 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
   failureRedirect:'/'
 }));
 router.get('/setcookie', function(req,res){
-  const header = req.session
+  const header = req.session.passport.user.accessToken
   res.setHeader(header)
   res.json(req.session)
 });
