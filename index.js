@@ -24,7 +24,6 @@ try {
 
 app.use(cors({origin:"http://localhost:3000", credentials:true, whithCredentials:true}));
 app.use(passport.initialize())
-app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded());
 app.use(session({
   secret: 'keyboard cat',
