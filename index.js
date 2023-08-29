@@ -37,7 +37,7 @@ app.use(passport.session());
 passport.use('google', new GoogleStrategy.Strategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: 'https://ultramarine-hen-kilt.cyclic.app/oauth2/redirect/google',
+  callbackURL: 'http://localhost:3000/connect/setcookie',
   scope: ['profile']
 },
 async function(req, accessToken, profile, done) {
@@ -91,7 +91,7 @@ router.post('/users', Register);
 router.post('/login', Login);
 router.get('/loginGoogle', passport.authenticate('google', {scope: ["profile", "email"]}));
 router.get('/oauth2/redirect/google', passport.authenticate('google', {
-  successReturnToOrRedirect:'http://localhost:3000/connect/setcookie',
+  successReturnToOrRedirect:'/setcookie',
   failureRedirect:'/'
 }));
 router.get('/setcookie', function(req,res){
