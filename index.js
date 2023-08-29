@@ -68,7 +68,8 @@ async function(req, accessToken, profile, done) {
   const tokenRefresh = jwt.sign({userId, name, email},process.env.REFRESH_TOKEN_SECRET, {
     expiresIn:'1d'
   });
-  await Users.update({refresh_token: tokenRefresh, access_token: token},{
+  const photoProfil = profile.picture
+  await Users.update({refresh_token: tokenRefresh, access_token: token, photo: photoProfil},{
     where:{
         id:userId
     }
