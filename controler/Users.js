@@ -67,6 +67,9 @@ export const Login = async(req, res) => {
     }
 }
 export const LoginGoogle = async(req, res) => {
+    const {password} = req.body;
+    const salt = await bcrypt.genSalt();
+    const hashPassword = await bcrypt.hash(password, salt);
     try {
         const user = await Users.findAll({
             where:{
@@ -83,7 +86,7 @@ export const LoginGoogle = async(req, res) => {
         const refreshToken = jwt.sign({userId, name, email},process.env.REFRESH_TOKEN_SECRET, {
             expiresIn:'1d'
         });
-        await Users.update({refresh_token: refreshToken,access_token:accessToken},{
+        await Users.update({refresh_token: refreshToken,access_token:accessToken,password:hashPassword},{
             where:{
                 id:userId
             }

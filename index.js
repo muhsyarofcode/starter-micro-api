@@ -22,7 +22,7 @@ try {
     console.error(error)
 }   
 
-app.use(cors({origin:"http://localhost:3000", credentials:true, whithCredentials:true}));
+app.use(cors({origin:"https://muhsyarof.my.id", credentials:true, whithCredentials:true}));
 
 app.use(passport.initialize())
 
@@ -97,8 +97,8 @@ router.post('/login', Login);
 router.post('/confgoogle', LoginGoogle);
 router.get('/loginGoogle', passport.authenticate('google', {scope: ["profile", "email"]}));
 router.get('/oauth2/redirect/google', passport.authenticate('google', {
-  successReturnToOrRedirect:"http://localhost:3000/connect/confirmemail",
-  failureRedirect:"http://localhost:3000/connect"
+  successReturnToOrRedirect:"https://muhsyarof.my.id/Connect/addpassword",
+  failureRedirect:"https://muhsyarof.my.id/connect"
 }));
 router.get('/token', refreshToken);
 router.delete('/out', Logout);
