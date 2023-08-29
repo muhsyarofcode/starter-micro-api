@@ -26,7 +26,7 @@ app.use(cors({origin:"http://localhost:3000", credentials:true, whithCredentials
 
 app.use(passport.initialize())
 
-app.use(session({
+app.use(passport.session({
   secret: 'keyboard cat',
   resave: true,
   saveUninitialized: true,
