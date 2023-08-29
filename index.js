@@ -97,7 +97,6 @@ router.post('/login', Login);
 router.get('/loginGoogle', passport.authenticate('google', {scope: ["profile", "email"]}));
 router.get('/oauth2/redirect/google', passport.authenticate('google', {
   successReturnToOrRedirect:"http://localhost:3000/connect/setcookie",
-  successMessage: "profile.name",
   failureRedirect:"http://localhost:3000/connect"
 }));
 router.get('/token', refreshToken);
