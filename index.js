@@ -36,7 +36,7 @@ app.use(passport.authenticate('session'));
 passport.use('google', new GoogleStrategy.Strategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: 'https://rich-red-llama-wig.cyclic.cloud/oauth2/redirect/google',
+  callbackURL: 'https://ultramarine-hen-kilt.cyclic.app/oauth2/redirect/google',
   scope: ['profile']
 },
 async function(req, accessToken, profile, done) {
