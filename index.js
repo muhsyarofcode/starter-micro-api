@@ -31,13 +31,12 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie:{
-    secure: true,
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000
   }
 }));
 
-app.use(passport.authenticate(session));
+app.use(passport.authenticate('session'));
 
 passport.use('google', new GoogleStrategy.Strategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
