@@ -23,15 +23,16 @@ try {
 }   
 
 app.use(cors({origin:"http://localhost:3000", credentials:true, whithCredentials:true}));
+
 app.use(passport.initialize())
 
 app.use(session({
   secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false
+  resave: true,
+  saveUninitialized: true
 }));
 
-app.use(session());
+app.use(passport.session());
 
 passport.use('google', new GoogleStrategy.Strategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
@@ -94,7 +95,7 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
   failureRedirect:'/'
 }));
 router.get('/setcookie', function(req,res){
-  console.log(req.session.passport.user)
+  console.log(req.session)
 });
 router.get('/token', refreshToken);
 router.delete('/out', Logout);
