@@ -24,9 +24,9 @@ try {
 
 app.use(cors({origin:"http://localhost:3000", credentials:true, whithCredentials:true}));
 
-app.use(passport.initialize())
 
-app.use(passport.session({
+
+app.use(session({
   secret: 'keyboard cat',
   resave: true,
   saveUninitialized: true,
@@ -36,8 +36,8 @@ app.use(passport.session({
     maxAge: 24 * 60 * 60 * 1000
   }
 }));
-
-app.use(session());
+app.use(passport.initialize())
+app.use(passport.session());
 
 passport.use('google', new GoogleStrategy.Strategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
