@@ -16,9 +16,15 @@ const Users = db.define('users', {
     password: {
         type: DataTypes.STRING
     },
+    photo: {
+        type: DataTypes.STRING
+    },
     refresh_token: {
         type: DataTypes.TEXT
     },
+    access_token: {
+        type: DataTypes.TEXT
+    }
 },{
     freezeTableName: true
 })

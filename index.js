@@ -47,10 +47,10 @@ passport.use('google', new GoogleStrategy.Strategy({
 async function(req, accessToken, profile, done) {
   await Users.findOrCreate({
     where:{
-      email: profile.email
+      googleId: profile.id
     },
     defaults:{
-      googleId: profile.id,
+      email: profile.email,
       name: profile.displayName
     }
   });
@@ -68,12 +68,12 @@ async function(req, accessToken, profile, done) {
   const tokenRefresh = jwt.sign({userId, name, email},process.env.REFRESH_TOKEN_SECRET, {
     expiresIn:'1d'
   });
-  var userData = {
-    accessToken: token,
-    refreshToken: tokenRefresh,
-    profile: profile
-  }
-  return done(null, userData)
+  await Users.update({refresh_token: tokenRefresh, access_token: token},{
+    where:{
+        id:userId
+    }
+ });
+  return done(null, profile)
   }
 ));
 
@@ -95,13 +95,14 @@ router.post('/users', Register);
 router.post('/login', Login);
 router.get('/loginGoogle', passport.authenticate('google', {scope: ["profile", "email"]}));
 router.get('/oauth2/redirect/google', passport.authenticate('google', {
-  successReturnToOrRedirect:'/setcookie',
-  failureRedirect:'/'
+  successReturnToOrRedirect:'/success',
+  failureRedirect:'/failed'
 }));
-router.get('/setcookie', function(req,res){
-  const refreshToken = req.user.refreshToken
-  res.cookie('refreshToken', refreshToken)
-  res.json(req.user)
+router.get('/succsess', function(req,res){
+  res.redirect("http://localhost:3000/connect/setcookie")
+});
+router.get('/failed', function(req,res){
+  res.redirect("http://localhost:3000/connect")
 });
 router.get('/token', refreshToken);
 router.delete('/out', Logout);
