@@ -28,8 +28,8 @@ app.use(cors({origin:"http://localhost:3000", credentials:true, whithCredentials
 
 app.use(session({
   secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
   cookie:{
     secure: true,
     httpOnly: true,
