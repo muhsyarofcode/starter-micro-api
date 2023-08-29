@@ -96,15 +96,9 @@ router.post('/users', Register);
 router.post('/login', Login);
 router.get('/loginGoogle', passport.authenticate('google', {scope: ["profile", "email"]}));
 router.get('/oauth2/redirect/google', passport.authenticate('google', {
-  successReturnToOrRedirect:'/success',
-  failureRedirect:'/failed'
+  successReturnToOrRedirect:"http://localhost:3000/connect/setcookie"+"cek",
+  failureRedirect:"http://localhost:3000/connect"
 }));
-router.get('/succsess', function(req,res){
-  res.redirect("http://localhost:3000/connect/setcookie")
-});
-router.get('/failed', function(req,res){
-  res.redirect("http://localhost:3000/connect")
-});
 router.get('/token', refreshToken);
 router.delete('/out', Logout);
 
