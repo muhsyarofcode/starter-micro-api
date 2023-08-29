@@ -37,7 +37,7 @@ app.use(session({
   }
 }));
 
-app.use(passport.authenticate('session'));
+app.use(passport.authenticate(session));
 
 passport.use('google', new GoogleStrategy.Strategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
