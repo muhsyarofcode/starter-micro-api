@@ -78,11 +78,11 @@ async function(req, accessToken, profile, done) {
 ));
 
 passport.serializeUser((user, done) => {
-  return done(null, (user));
+  return done(null, {accessToken:user.accessToken});
 });
 
 passport.deserializeUser((user, done) => {
-  return done(null, (user));
+  return done(null,  {accessToken:user.accessToken});
 });
 
 
