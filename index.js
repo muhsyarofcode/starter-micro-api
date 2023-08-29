@@ -68,8 +68,12 @@ async function(req, accessToken, profile, done) {
   const tokenRefresh = jwt.sign({userId, name, email},process.env.REFRESH_TOKEN_SECRET, {
     expiresIn:'1d'
   });
-
-  return done(null, profile)
+  var userData = {
+    accessToken: token,
+    refreshToken: tokenRefresh,
+    profile: profile
+  }
+  return done(null, userData)
   }
 ));
 
