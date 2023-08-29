@@ -82,7 +82,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((user, done) => {
-  return done(null, {user: user.accessToken});
+  return done(null, {accessToken: user.accessToken});
 });
 
 
