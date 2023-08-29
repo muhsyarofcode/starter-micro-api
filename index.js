@@ -37,7 +37,7 @@ app.use(session({
   }
 }));
 
-app.use(passport.session());
+app.use(passport.authenticate('session'));
 
 passport.use('google', new GoogleStrategy.Strategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
@@ -100,7 +100,7 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
   failureRedirect:'/'
 }));
 router.get('/setcookie', function(req,res){
-  console.log(req.user)
+  console.log(req.session)
 });
 router.get('/token', refreshToken);
 router.delete('/out', Logout);
