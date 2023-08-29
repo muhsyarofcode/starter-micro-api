@@ -51,29 +51,10 @@ async function(req, accessToken, profile, done) {
     },
     defaults:{
       email: profile.email,
-      name: profile.displayName
+      name: profile.displayName,
+      photo: profile.picture
     }
   });
-  const user = await Users.findAll({
-    where:{
-      googleId: profile.id
-    }
-  })
-  const userId = user[0].id;
-  const name = user[0].name;
-  const email = user[0].email;
-  const token = jwt.sign({userId, name, email},process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn:'5s'
-  });
-  const tokenRefresh = jwt.sign({userId, name, email},process.env.REFRESH_TOKEN_SECRET, {
-    expiresIn:'1d'
-  });
-  const photoProfil = profile.picture
-  await Users.update({refresh_token: tokenRefresh, access_token: token, photo: photoProfil},{
-    where:{
-        id:userId
-    }
- });
   return done(null, profile)
   }
 ));
@@ -97,7 +78,7 @@ router.post('/login', Login);
 router.post('/confgoogle', LoginGoogle);
 router.get('/loginGoogle', passport.authenticate('google', {scope: ["profile", "email"]}));
 router.get('/oauth2/redirect/google', passport.authenticate('google', {
-  successReturnToOrRedirect:"https://muhsyarof.my.id/Connect/addpassword",
+  successReturnToOrRedirect:"https://muhsyarof.my.id/Connect/createpassword",
   failureRedirect:"https://muhsyarof.my.id/connect"
 }));
 router.get('/token', refreshToken);
