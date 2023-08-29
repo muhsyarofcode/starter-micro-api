@@ -70,6 +70,12 @@ export const LoginGoogle = async(req, res) => {
     if(password !== confPassword)return res.status(400).json({msg: "Password dan confirm password tidak cocok"})
     const salt = await bcrypt.genSalt();
     const hashPassword = await bcrypt.hash(password, salt);
+    const existpass = await Users.findAll({
+        where:{
+            email:req.body.email
+        }
+    });
+    if(existpass[0].password != null)return res.status(400).json({msg: "email sudah punya password"})
     try {
         await Users.update({password:hashPassword},{
             where:{
