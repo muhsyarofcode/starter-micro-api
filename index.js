@@ -100,7 +100,7 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
 }));
 router.get('/setcookie', function(req,res){
   const cookie = req.session
-  res.cookie('cookie',cookie)
+  console.log(cookie)
   res.json(req.session)
 });
 router.get('/token', refreshToken);
