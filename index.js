@@ -73,16 +73,16 @@ async function(req, accessToken, profile, done) {
     refreshToken: tokenRefresh,
     profile: profile
   }
-  return done(null, userData)
+  return done(null, user)
   }
 ));
 
 passport.serializeUser((user, done) => {
-  return done(null, {accessToken:user.accessToken});
+  return done(null, (user));
 });
 
 passport.deserializeUser((user, done) => {
-  return done(null,  {accessToken:user.accessToken});
+  return done(null,  (user));
 });
 
 
