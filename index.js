@@ -24,7 +24,7 @@ try {
 
 app.use(cors({origin:"http://localhost:3000", credentials:true, whithCredentials:true}));
 
-
+app.use(passport.initialize())
 
 app.use(session({
   secret: 'keyboard cat',
@@ -36,7 +36,7 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000
   }
 }));
-app.use(passport.initialize())
+
 app.use(passport.session());
 
 passport.use('google', new GoogleStrategy.Strategy({
