@@ -6,7 +6,7 @@ import cors from "cors";
 import session from 'express-session'
 import passport from 'passport'
 import GoogleStrategy from 'passport-google-oauth2'
-import { getUsers,  Register, Login, Logout} from "./controler/Users.js";
+import { getUsers,  Register, Login, Logout, LoginGoogle} from "./controler/Users.js";
 import { verifyToken } from "./middleware/verifyToken.js";
 import { refreshToken } from "./controler/RefreshToken.js";
 import Users from "./models/UserModel.js";
@@ -94,9 +94,10 @@ app.use(router);
 router.get('/users', verifyToken, getUsers);
 router.post('/users', Register);
 router.post('/login', Login);
+router.post('/confgoogle', LoginGoogle);
 router.get('/loginGoogle', passport.authenticate('google', {scope: ["profile", "email"]}));
 router.get('/oauth2/redirect/google', passport.authenticate('google', {
-  successReturnToOrRedirect:"http://localhost:3000/connect/setcookie",
+  successReturnToOrRedirect:"http://localhost:3000/connect/:confirm?email",
   failureRedirect:"http://localhost:3000/connect"
 }));
 router.get('/token', refreshToken);
