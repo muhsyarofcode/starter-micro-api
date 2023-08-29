@@ -31,7 +31,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie:{
-    httpOnly: true,
+    secure:true,
     maxAge: 24 * 60 * 60 * 1000
   }
 }));
@@ -98,7 +98,7 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
   successReturnToOrRedirect:'http://localhost:3000/connect/setcookie',
   failureRedirect:'/'
 }));
-router.get('/setcookie',passport.authenticate('session'), function(req,res){
+router.get('/setcookie', function(req,res){
   console.log(req.session)
 });
 router.get('/token', refreshToken);
