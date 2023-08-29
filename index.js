@@ -90,7 +90,7 @@ router.post('/users', Register);
 router.post('/login', Login);
 router.get('/loginGoogle', passport.authenticate('google', {scope: ["profile", "email"]}));
 router.get('/oauth2/redirect/google', passport.authenticate('google', {
-  successReturnToOrRedirect:'/setcookie',
+  successReturnToOrRedirect:'http://localhost:3000/connect/setcookie',
   failureRedirect:'/'
 }));
 router.get('/setcookie', function(req,res){
