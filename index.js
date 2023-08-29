@@ -78,11 +78,11 @@ async function(req, accessToken, profile, done) {
 ));
 
 passport.serializeUser((user, done) => {
-  return done(null, (user));
+  return done(null, {user: user.accessToken});
 });
 
 passport.deserializeUser((user, done) => {
-  return done(null, (user));
+  return done(null, {user: user.accessToken});
 });
 
 
@@ -99,7 +99,7 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
   failureRedirect:'/'
 }));
 router.get('/setcookie', function(req,res){
-  res.json(req.session.passport.profile)
+  res.json(req.session.passport)
 });
 router.get('/token', refreshToken);
 router.delete('/out', Logout);
