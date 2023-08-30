@@ -7,6 +7,9 @@ const Users = db.define('users', {
     googleId: {
         type: DataTypes.STRING
     },
+    facebookId: {
+        type: DataTypes.STRING
+    },
     name: {
         type: DataTypes.STRING
     },

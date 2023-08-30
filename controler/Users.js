@@ -65,7 +65,7 @@ export const Login = async(req, res) => {
         res.status(404).json({msg:"email tidak ditemukan"})
     }
 }
-export const LoginGoogle = async(req, res) => {
+export const CreatePass = async(req, res) => {
     const {password, confPassword} = req.body;
     if(password !== confPassword)return res.status(400).json({msg: "Password dan confirm password tidak cocok"})
     const salt = await bcrypt.genSalt();

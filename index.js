@@ -6,11 +6,12 @@ import cors from "cors";
 import session from 'express-session'
 import passport from 'passport'
 import GoogleStrategy from 'passport-google-oauth2'
-import { getUsers,  Register, Login, Logout, LoginGoogle} from "./controler/Users.js";
+import FacebookStrategy from "passport-facebook"
+import { getUsers,  Register, Login, Logout, CreatePass} from "./controler/Users.js";
 import { verifyToken } from "./middleware/verifyToken.js";
 import { refreshToken } from "./controler/RefreshToken.js";
 import Users from "./models/UserModel.js";
-import jwt from "jsonwebtoken";
+
 dotenv.config();
 const app = express()
 const router = express.Router();
@@ -47,18 +48,39 @@ passport.use('google', new GoogleStrategy.Strategy({
 async function(req, accessToken, profile, done) {
   await Users.findOrCreate({
     where:{
-      googleId: profile.id
+      email: profile.email
     },
     defaults:{
-      email: profile.email,
+      googleId: profile.id,
       name: profile.displayName,
       photo: profile.picture
     }
   });
-  return done(null, profile)
-  }
+  return done(null, profile);
+}
 ));
+passport.use('facebook',new FacebookStrategy.Strategy({
+  clientID: process.env.FACEBOOK_CLIENT_ID,
+  clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+  callbackURL: 'https://ultramarine-hen-kilt.cyclic.app/oauth2/redirect/facebook',
+  profileFields: ['id', 'displayName', 'photos', 'email']
+},
+async function(req, accessToken, profile, done) {
+  await Users.findOrCreate({
+    where:{
+      email: profile.email
+    },
+    defaults:{
+      facebookId: profile.id,
+      name: profile.displayName,
+      photo: profile.photos
+    }
+  });
+  return done(null, profile);
+}
+  ));
 
+  
 passport.serializeUser((user, done) => {
   return done(null, (user));
 });
@@ -75,9 +97,14 @@ app.use(router);
 router.get('/users', verifyToken, getUsers);
 router.post('/users', Register);
 router.post('/login', Login);
-router.post('/confgoogle', LoginGoogle);
+router.post('/confgoogle', CreatePass);
 router.get('/loginGoogle', passport.authenticate('google', {scope: ["profile", "email"]}));
 router.get('/oauth2/redirect/google', passport.authenticate('google', {
+  successReturnToOrRedirect:"https://muhsyarof.my.id/Connect/createpassword",
+  failureRedirect:"https://muhsyarof.my.id/connect"
+}));
+router.get('/loginFacebook', passport.authenticate('facebook', {scope: ["profile", "email"]}));
+router.get('/oauth2/redirect/facebook', passport.authenticate('facebook', {
   successReturnToOrRedirect:"https://muhsyarof.my.id/Connect/createpassword",
   failureRedirect:"https://muhsyarof.my.id/connect"
 }));
