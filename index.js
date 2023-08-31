@@ -97,15 +97,15 @@ app.use(router);
 router.get('/users', verifyToken, getUsers);
 router.post('/users', Register);
 router.post('/login', Login);
-router.post('/confgoogle', CreatePass);
+router.post('/createpassword', CreatePass);
 router.get('/loginGoogle', passport.authenticate('google', {scope: ["profile", "email"]}));
 router.get('/oauth2/redirect/google', passport.authenticate('google', {
-  successReturnToOrRedirect:"https://muhsyarof.my.id/Connect/createpassword",
+  successReturnToOrRedirect:"https://muhsyarof.my.id/Connectcrtpass",
   failureRedirect:"https://muhsyarof.my.id/connect"
 }));
 router.get('/loginFacebook', passport.authenticate('facebook', {scope: ["profile", "email"]}));
 router.get('/oauth2/redirect/facebook', passport.authenticate('facebook', {
-  successReturnToOrRedirect:"https://muhsyarof.my.id/Connect/createpassword",
+  successReturnToOrRedirect:"https://muhsyarof.my.id/Connectcrtpass",
   failureRedirect:"https://muhsyarof.my.id/connect"
 }));
 router.get('/token', refreshToken);
