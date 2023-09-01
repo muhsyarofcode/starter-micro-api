@@ -96,7 +96,7 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
   successReturnToOrRedirect:"https://muhsyarof.my.id/Connectcrtpass",
   failureRedirect:"https://muhsyarof.my.id/connect"
 }));
-router.get('/loginFacebook', passport.authenticate('facebook',{scope: ["public_profile", "email"]}));
+router.get('/loginFacebook', passport.authenticate('facebook',{scope: "email"}));
 router.get('/oauth2/redirect/facebook', passport.authenticate('facebook', {
   successReturnToOrRedirect:"https://muhsyarof.my.id/Connectcrtpass",
   failureRedirect:"https://muhsyarof.my.id/connect"
