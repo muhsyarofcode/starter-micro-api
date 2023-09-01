@@ -69,12 +69,12 @@ passport.use('facebook',new FacebookStrategy.Strategy({
 async function(req, accessToken, profile, done) {
   await Users.findOrCreate({
     where:{
-      email: public_profile.email
+      email: profile.email
     },
     defaults:{
-      facebookId: public_profile.id,
-      name: public_profile.displayName,
-      photo: public_profile.photos
+      facebookId: profile.id,
+      name: profile.displayName,
+      photo: profile.photos
     }
   });
   return done(null, profile);
@@ -104,7 +104,7 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
   successReturnToOrRedirect:"https://muhsyarof.my.id/Connectcrtpass",
   failureRedirect:"https://muhsyarof.my.id/connect"
 }));
-router.get('/loginFacebook', passport.authenticate('facebook'));
+router.get('/loginFacebook', passport.authenticate('facebook',{scope: ["public_profile"]}));
 router.get('/oauth2/redirect/facebook', passport.authenticate('facebook', {
   successReturnToOrRedirect:"https://muhsyarof.my.id/Connectcrtpass",
   failureRedirect:"https://muhsyarof.my.id/connect"
