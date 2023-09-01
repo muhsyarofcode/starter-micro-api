@@ -67,16 +67,7 @@ passport.use('facebook',new FacebookStrategy.Strategy({
   state: true
 },
 async function(req, accessToken, profile, done) {
-  await Users.findOrCreate({
-    where:{
-      email: profile.email
-    },
-    defaults:{
-      facebookId: profile.id,
-      name: profile.displayName,
-      photo: profile.photos
-    }
-  });
+  console.log(profile)
   return done(null, profile);
 }
   ));
