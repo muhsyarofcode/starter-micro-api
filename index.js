@@ -66,8 +66,8 @@ passport.use('facebook',new FacebookStrategy.Strategy({
   scope: ['public_profile'],
   state: true
 },
-async function(req, accessToken, profile, done) {
-  console.log("profile")
+async function(req, accessToken, public_profile, done) {
+  console.log(public_profile)
   return done(null, profile);
 }
   ));
