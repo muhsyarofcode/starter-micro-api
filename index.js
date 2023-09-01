@@ -63,18 +63,18 @@ passport.use('facebook',new FacebookStrategy.Strategy({
   clientID: process.env.FACEBOOK_CLIENT_ID,
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
   callbackURL: 'https://ultramarine-hen-kilt.cyclic.app/oauth2/redirect/facebook',
-  scope: ['profile'],
+  scope: ['public_profile'],
   state: true
 },
 async function(req, accessToken, profile, done) {
   await Users.findOrCreate({
     where:{
-      email: profile.email
+      email: public_profile.email
     },
     defaults:{
-      facebookId: profile.id,
-      name: profile.displayName,
-      photo: profile.photos
+      facebookId: public_profile.id,
+      name: public_profile.displayName,
+      photo: public_profile.photos
     }
   });
   return done(null, profile);
