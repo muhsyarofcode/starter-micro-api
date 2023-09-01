@@ -73,7 +73,7 @@ async function(req, accessToken, profile, done) {
     },
     defaults:{
       facebookId: profile.id,
-      name: profile.displayName,
+      name: profile.name,
       photo: profile.photos
     }
   });
