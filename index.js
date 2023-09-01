@@ -64,10 +64,11 @@ passport.use('facebook',new FacebookStrategy.Strategy({
   clientID: process.env.FACEBOOK_CLIENT_ID,
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
   callbackURL: 'https://ultramarine-hen-kilt.cyclic.app/oauth2/redirect/facebook',
-  profileFields: [ 'email' , 'name', 'id' ]
+  profileFields: [ 'email' , 'name', 'id', 'picture' ]
 },
 async function(req, accessToken, profile, done) {
   console.log(profile)
+  console.log(profile.email)
   return done(null, profile);
 }
   ));
