@@ -60,15 +60,20 @@ async function(req, accessToken, profile, done) {
 }
 ));
 
+passport.use('/me','GET',{"fields":"id,name,email,picture"},
+  function(response) {
+      console.log(response)
+  }
+);
 passport.use('facebook',new FacebookStrategy.Strategy({
   clientID: process.env.FACEBOOK_CLIENT_ID,
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
   callbackURL: 'https://ultramarine-hen-kilt.cyclic.app/oauth2/redirect/facebook',
-  scope: ['email'],
+  profileFields: ['id', 'displayName', 'email','picture'],
   state: true
 },
-async function(req, accessToken, email, profile, done) {
-  console.log(email)
+async function(req, accessToken, profile, done) {
+  console.log(profile)
   return done(null, profile);
 }
   ));
@@ -96,7 +101,7 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
   successReturnToOrRedirect:"https://muhsyarof.my.id/Connectcrtpass",
   failureRedirect:"https://muhsyarof.my.id/connect"
 }));
-router.get('/loginFacebook', passport.authenticate('facebook',{scope: "email"}));
+router.get('/loginFacebook', passport.authenticate('facebook',{scope: "id,name,email,picture"}));
 router.get('/oauth2/redirect/facebook', passport.authenticate('facebook', {
   successReturnToOrRedirect:"https://muhsyarof.my.id/Connectcrtpass",
   failureRedirect:"https://muhsyarof.my.id/connect"
