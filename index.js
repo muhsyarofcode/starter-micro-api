@@ -67,13 +67,14 @@ passport.use('facebook',new FacebookStrategy.Strategy({
   profileFields: [ 'email' , 'name', 'id', 'picture' ]
 },
 async function(req, accessToken, profile, done) {
+  console.log(profile.id)
   return done(null, profile);
 }
   ));
 
   
 passport.serializeUser((user, done) => {
-  console.log(user)
+  console.log(user.id)
   return done(null, (user));
 });
 
