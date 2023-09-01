@@ -60,20 +60,16 @@ async function(req, accessToken, profile, done) {
 }
 ));
 
-passport.use('/me','GET',{"fields":"id,name,email,picture"},
-  function(response) {
-      console.log(response)
-  }
-);
 passport.use('facebook',new FacebookStrategy.Strategy({
   clientID: process.env.FACEBOOK_CLIENT_ID,
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
   callbackURL: 'https://ultramarine-hen-kilt.cyclic.app/oauth2/redirect/facebook',
-  profileFields: ['id', 'displayName', 'email','picture'],
+  scope: ['public_profile','email'],
   state: true
 },
-async function(req, accessToken, profile, done) {
-  console.log(profile)
+async function(req, accessToken,email , public_profile, done) {
+  console.log(public_profile)
+  onsole.log(email.accessToken)
   return done(null, profile);
 }
   ));
