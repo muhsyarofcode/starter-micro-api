@@ -69,7 +69,7 @@ passport.use('facebook',new FacebookStrategy.Strategy({
 async function(req, accessToken, profile, done) {
   const name = (profile.name.givenName)+(profile.name.middleName)+(profile.name.familyName)
   console.log(name)
-  console.log(displayName)
+  console.log(profile.displayName)
   return done(null, profile);
 }
   ));
