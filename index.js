@@ -67,15 +67,22 @@ passport.use('facebook',new FacebookStrategy.Strategy({
   profileFields: [ 'email' , 'name', 'id', 'picture' ]
 },
 async function(req, accessToken, profile, done) {
-  console.log(profile.emails.value)
-  console.log(profile.photos.value)
+ await Users.findOrCreate({
+    where:{
+      email: profile.emails
+    },
+    defaults:{
+      facebookId: profile.id,
+      name: profile.displayName,
+      photo: profile.photos
+    }
+  });
   return done(null, profile);
 }
   ));
 
   
 passport.serializeUser((user, done) => {
-  console.log(user.id)
   return done(null, (user));
 });
 
