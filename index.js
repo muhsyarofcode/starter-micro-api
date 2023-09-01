@@ -69,6 +69,7 @@ passport.use('facebook',new FacebookStrategy.Strategy({
 async function(req, accessToken, email, public_profile, done) {
   const profile = (public_profile+email)
   console.log(email)
+  console.log(public_profile)
   return done(null, profile);
 }
   ));
