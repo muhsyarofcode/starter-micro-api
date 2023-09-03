@@ -69,6 +69,11 @@ export const Login = async(req, res) => {
 export const ChangeName = async(req,res) => {
     const newname = req.body;
     const refreshToken = req.cookies.refreshToken;
+    await Users.update({name: null},{
+        where:{
+            refreshToken: refreshToken
+        }
+    })
     try {
         await Users.update({name: newname},{
             where:{
