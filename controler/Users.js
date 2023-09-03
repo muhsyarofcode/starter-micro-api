@@ -69,8 +69,15 @@ export const Login = async(req, res) => {
 export const ChangeName = async(req,res) => {
     const newname = req.body.newname;
     const refreshToken = req.cookies.refreshToken;
-    console.log(newname)
-    console.log(refreshToken)
+    try {
+        await Users.update({name: newname},{
+            where:{
+                refreshToken: refreshToken
+            }
+        });
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 export const CreatePass = async(req, res) => {
