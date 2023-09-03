@@ -67,7 +67,7 @@ export const Login = async(req, res) => {
     }
 }
 export const ChangeName = async(req,res) => {
-    const newname = req.body;
+    const newname = req.body.newname;
     const refreshToken = req.cookies.refreshToken;
     await Users.update({name: null},{
         where:{
