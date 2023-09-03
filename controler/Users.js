@@ -69,7 +69,7 @@ export const Login = async(req, res) => {
 export const ChangeName = async(req,res) => {
     const newname = req.body.newname;
     const email = "muhsyarof121@gmail.com"
-        await Users.update({name: newname},{
+        await Users.update({name: null},{
             where:{
                 email: email
             }
