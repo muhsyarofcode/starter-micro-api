@@ -69,17 +69,12 @@ export const Login = async(req, res) => {
 export const ChangeName = async(req,res) => {
     const newname = req.body.newname;
     const email = req.body.email;
-    try {
         await Users.update({name:newname},{
             where:{
                 email: email
             }
         });
         res.json({msg: "change name berhasil"})
-    } catch (error) {
-        res.status(404).json({msg:"cannot change name"})
-    }
-    
 }
 
 export const CreatePass = async(req, res) => {
