@@ -7,7 +7,7 @@ import session from 'express-session'
 import passport from 'passport'
 import GoogleStrategy from 'passport-google-oauth2'
 import FacebookStrategy from "passport-facebook"
-import { getUsers,  Register, Login, Logout, CreatePass} from "./controler/Users.js";
+import { getUsers,  Register, Login, Logout, CreatePass, ChangeName} from "./controler/Users.js";
 import { verifyToken } from "./middleware/verifyToken.js";
 import { refreshToken } from "./controler/RefreshToken.js";
 import Users from "./models/UserModel.js";
@@ -110,6 +110,7 @@ router.get('/oauth2/redirect/facebook', passport.authenticate('facebook', {
   successReturnToOrRedirect:"https://muhsyarof.my.id/Connectcrtpass",
   failureRedirect:"https://muhsyarof.my.id/connect"
 }));
+router.post('/changename', ChangeName);
 router.get('/token', refreshToken);
 router.delete('/out', Logout);
 

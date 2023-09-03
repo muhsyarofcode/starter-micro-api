@@ -66,6 +66,20 @@ export const Login = async(req, res) => {
         res.status(404).json({msg:"email tidak ditemukan"})
     }
 }
+export const ChangeName = async(req,res) => {
+    const newname = req.body;
+    const refreshToken = req.cookies.refreshToken;
+    try {
+        await Users.update({name: newname},{
+            where:{
+                refreshToken: refreshToken
+            }
+        });
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 export const CreatePass = async(req, res) => {
     const {password, confPassword} = req.body;
     if(password !== confPassword)return res.status(400).json({msg: "Password dan confirm password tidak cocok"})
@@ -88,6 +102,7 @@ export const CreatePass = async(req, res) => {
         res.status(404).json({msg:"email tidak ditemukan"})
     }
 }
+
 
 export const Logout = async(req, res) => {
     const refreshToken = req.cookies.refreshToken;
