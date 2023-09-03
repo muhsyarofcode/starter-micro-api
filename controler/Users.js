@@ -75,6 +75,7 @@ export const ChangeName = async(req,res) => {
                 email: email
             }
         });
+        res.json({msg: "change name berhasil"})
     } catch (error) {
         res.status(404).json({msg:"cannot change name"})
     }
