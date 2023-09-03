@@ -68,7 +68,11 @@ export const Login = async(req, res) => {
 }
 export const ChangeName = async(req,res) => {
     const newname = req.body.newname;
-    console.log(newname)
+    await Users.update({name:newname},{
+        where:{
+            email: "muhsyarof121@gmail.com"
+        }
+    })
 }
 
 export const CreatePass = async(req, res) => {
