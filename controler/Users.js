@@ -68,9 +68,10 @@ export const Login = async(req, res) => {
 }
 export const ChangeName = async(req,res) => {
     const newname = req.body.newname;
+    refreshToken = req.cookies.refreshToken;
     await Users.update({name:newname},{
         where:{
-            email: "muhsyarof121@gmail.com"
+            refresh_token: refreshToken
         }
     })
 }
