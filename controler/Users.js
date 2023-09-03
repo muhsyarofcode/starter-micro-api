@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 export const getUsers = async(req, res) => {
     try {
         const users = await Users.findAll({
-            attributes: ['id','name','email']
+            attributes: ['id','name','email','photo']
         });
         res.json(users);
     } catch (error) {
@@ -43,10 +43,11 @@ export const Login = async(req, res) => {
         const userId = user[0].id;
         const name = user[0].name;
         const email = user[0].email;
-        const accessToken = jwt.sign({userId, name, email},process.env.ACCESS_TOKEN_SECRET, {
+        const photo = user[0].photo;
+        const accessToken = jwt.sign({userId, name, email, photo},process.env.ACCESS_TOKEN_SECRET, {
             expiresIn:'20s'
         });
-        const refreshToken = jwt.sign({userId, name, email},process.env.REFRESH_TOKEN_SECRET, {
+        const refreshToken = jwt.sign({userId, name, email, photo},process.env.REFRESH_TOKEN_SECRET, {
             expiresIn:'1d'
         });
         await Users.update({refresh_token: refreshToken},{
