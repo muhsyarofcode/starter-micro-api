@@ -4,7 +4,7 @@ export const sendMessage = async(req,res) => {
     try {
         const email = req.body.email;
         const name = req.body.name;
-        const message = req.body.massage
+        const message = req.body.message
         await Chat.create({
             email: email,
             name: name,
