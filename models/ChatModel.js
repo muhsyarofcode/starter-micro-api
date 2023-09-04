@@ -15,6 +15,9 @@ const Chat = db.define('publicchat', {
     },
     photo: {
         type: DataTypes.STRING
+    },
+    createdAt: {
+        type: DataTypes.TEXT
     }
 },{
     freezeTableName: true

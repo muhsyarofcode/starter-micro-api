@@ -6,11 +6,13 @@ export const sendMessage = async(req,res) => {
         const name = req.body.name;
         const message = req.body.message
         const photo = req.body.photo
+        const time = req.body.createdAt
         await Chat.create({
             email: email,
             name: name,
             message: message,
-            photo: photo
+            photo: photo,
+            createdAt: time
         })
         res.json({msg:"message"})
     } catch (error) {
