@@ -1,4 +1,4 @@
-import Chat from "../models/ChatModel"
+import Chat from "../models/ChatModel.js"
 
 export const sendMessage = async(req,res) => {
     try {
