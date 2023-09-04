@@ -20,7 +20,6 @@ const router = express.Router();
 try {
     await db.authenticate();
     console.log('database connected');
-    await Chat.sync();
 } catch (error) {
     console.error(error)
 }   
