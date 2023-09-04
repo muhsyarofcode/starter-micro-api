@@ -11,6 +11,7 @@ import { getUsers,  Register, Login, Logout, CreatePass, ChangeName} from "./con
 import { verifyToken } from "./middleware/verifyToken.js";
 import { refreshToken } from "./controler/RefreshToken.js";
 import Users from "./models/UserModel.js";
+import Chat from "./models/chatmodel.js";
 
 dotenv.config();
 const app = express()
@@ -19,7 +20,7 @@ const router = express.Router();
 try {
     await db.authenticate();
     console.log('database connected');
-    await db.sync();
+    await Chat.sync();
 } catch (error) {
     console.error(error)
 }   
