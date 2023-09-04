@@ -20,5 +20,5 @@ export const receiveMessage = async (req,res) => {
     const history = await Chat.findAll({
         attributes: ['name','email','message','createdAt']
     })
-    console.log(history)
+    res.json(history)
 }
