@@ -129,3 +129,27 @@ export const Logout = async(req, res) => {
         });
         return res.sendStatus(200);
 } 
+
+export const Delete = async(req,res) =>{
+    const refreshToken = req.cookies.refreshToken;
+    if(!refreshToken) return res.sendStatus(204);
+    const user = await Users.findAll({
+        where: {
+            refresh_token: refreshToken
+        }
+    });
+    if(!user[0]) return res.sendStatus(204);
+    const userId = user[0].id;
+    await Users.destroy({
+        where: {
+            id: userId
+        }
+    });
+    res.clearCookie('refreshToken','refreshToken',{
+        secure: true,
+        sameSite: "none",
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000
+    });
+    return res.sendStatus(200);
+}
