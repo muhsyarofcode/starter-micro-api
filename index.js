@@ -19,6 +19,7 @@ const router = express.Router();
 try {
     await db.authenticate();
     console.log('database connected');
+    await db.sync();
 } catch (error) {
     console.error(error)
 }   

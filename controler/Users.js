@@ -67,14 +67,19 @@ export const Login = async(req, res) => {
     }
 }
 export const ChangeName = async(req,res) => {
-    const newname = req.body.newname;
-    const email = req.body.email;
-        await Users.update({name:newname},{
-            where:{
-                email: email
-            }
-        });
-        res.json({msg: "change name berhasil"})
+    try {
+        const newname = req.body.newname;
+        const email = req.body.email;
+            await Users.update({name:newname},{
+                where:{
+                    email: email
+                }
+            });
+            res.json({msg: "change name berhasil"})
+    } catch (error) {
+        res.status(404).json({msg:"name not changed"})
+    }
+   
 }
 
 export const CreatePass = async(req, res) => {
