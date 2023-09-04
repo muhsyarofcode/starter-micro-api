@@ -5,10 +5,12 @@ export const sendMessage = async(req,res) => {
         const email = req.body.email;
         const name = req.body.name;
         const message = req.body.message
+        const photo = req.body.photo
         await Chat.create({
             email: email,
             name: name,
-            message: message
+            message: message,
+            photo: photo
         })
         res.json({msg:"message"})
     } catch (error) {
