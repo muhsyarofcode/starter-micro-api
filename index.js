@@ -11,7 +11,7 @@ import { getUsers,  Register, Login, Logout, CreatePass, ChangeName} from "./con
 import { verifyToken } from "./middleware/verifyToken.js";
 import { refreshToken } from "./controler/RefreshToken.js";
 import Users from "./models/UserModel.js";
-import Chat from "./models/chatmodel.js";
+import { receiveMessage, sendMessage } from "./controler/chatMasage.js";
 
 dotenv.config();
 const app = express()
@@ -115,6 +115,8 @@ router.post('/changename', ChangeName);
 router.get('/token', refreshToken);
 router.delete('/out', Logout);
 
+router.post('/sendmessage', sendMessage)
+router.get('/receivemessage', receiveMessage)
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {
