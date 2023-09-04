@@ -20,7 +20,7 @@ export const sendMessage = async(req,res) => {
 
 export const receiveMessage = async (req,res) => {
     const history = await Chat.findAll({
-        attributes: ['name','email','message','createdAt']
+        attributes: ['name','email','message','createdAt','photo']
     })
     res.json(history)
 }
