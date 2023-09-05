@@ -22,6 +22,9 @@ const Users = db.define('users', {
     photo: {
         type: DataTypes.STRING
     },
+    role: {
+        type: DataTypes.STRING
+    },
     refresh_token: {
         type: DataTypes.TEXT
     }

@@ -54,7 +54,8 @@ async function(req, accessToken, profile, done) {
     defaults:{
       googleId: profile.id,
       name: profile.displayName,
-      photo: profile.picture
+      photo: profile.picture,
+      role:"user"
     }
   });
   return done(null, profile);
@@ -76,7 +77,8 @@ async function(req, accessToken, profile, done) {
     defaults:{
       facebookId: profile.id,
       name: name,
-      photo: profile.photos[0].value
+      photo: profile.photos[0].value,
+      role:"user"
     }
   });
   return done(null, profile);
