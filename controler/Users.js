@@ -51,7 +51,7 @@ export const Login = async(req, res) => {
         const refreshToken = jwt.sign({userId, name, email, photo, role},process.env.REFRESH_TOKEN_SECRET, {
             expiresIn:'1d'
         });
-        await Users.update({refresh_token: refreshToken},{
+        await Users.update({refresh_token: refreshToken, activity:"online"},{
             where:{
                 id:userId
             }
@@ -117,7 +117,7 @@ export const Logout = async(req, res) => {
         });
         if(!user[0]) return res.sendStatus(204);
         const userId = user[0].id;
-        await Users.update({refresh_token: null},{
+        await Users.update({refresh_token: null, activity: "offline"},{
             where: {
                 id: userId
             }

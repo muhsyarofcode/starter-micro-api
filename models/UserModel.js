@@ -25,6 +25,9 @@ const Users = db.define('users', {
     role: {
         type: DataTypes.STRING
     },
+    activity: {
+        type: DataTypes.STRING
+    },
     refresh_token: {
         type: DataTypes.TEXT
     }
