@@ -11,7 +11,7 @@ const Chat = db.define('publicchat', {
         type: DataTypes.STRING
     },
     message: {
-        type: DataTypes.STRING
+        type: DataTypes.TEXT
     },
     photo: {
         type: DataTypes.STRING
